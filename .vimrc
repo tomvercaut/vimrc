@@ -18,10 +18,21 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Set the fileformat to unix
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set fileformat=unix
+set fileformats=unix,dos
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Disable the beeping and flash if an error occurs.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set noerrorbells
 set novisualbell
+set vb t_vb=
+
+if has('gui_running')
+	autocmd GUIEnter * set vb t_vb=
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => If the rust language server is availbe, start it
@@ -83,4 +94,10 @@ endif
 " => Open terminal in Vim in a vertical split
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <Leader>tt :vertical :term<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Toggle NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
 
