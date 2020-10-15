@@ -6,6 +6,7 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
+Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'arcticicestudio/nord-vim'
 Plug 'rust-lang/rust.vim'
@@ -75,7 +76,7 @@ noremap <silent> <C-Down> :resize -3<CR>
 " => OS specific terminal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('win32')
-	set shell=C:\\Program\ Files\\PowerShell\\7\\pwsh.exe
+	set shell=\"C:\\Program\ Files\\PowerShell\\7\\pwsh.exe\"
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
