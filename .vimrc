@@ -8,12 +8,14 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
 Plug 'arcticicestudio/nord-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
@@ -100,4 +102,34 @@ nnoremap <silent> <Leader>tt :vertical :term<CR>
 " => Toggle NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <Leader>t :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim Rust Racer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hidden
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+augroup Racer
+	autocmd!
+	autocmd FileType rust nmap <buffer> gd		<Plug>(rust-def)
+	autocmd FileType rust nmap <buffer> gs		<Plug>(rust-def-split)
+	autocmd FileType rust nmap <buffer> gx		<Plug>(rust-def-vertical)
+	autocmd FileType rust nmap <buffer> gt		<Plug>(rust-def-tab)
+	autocmd FileType rust nmap <buffer> <leader>gd	<Plug>(rust-doc)
+	autocmd FileType rust nmap <buffer> <leader>gD	<Plug>(rust-doc-tab)
+augroup END
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256
+let g:airline_powerline_fonts = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Rust
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rustfmt_autosave = 1
+
+
 
