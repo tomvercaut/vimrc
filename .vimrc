@@ -1,21 +1,36 @@
+"" info found on https://github.com/ycm-core/YouCompleteMe/issues/1751
+"function! BuildYCM(info)
+	"" info is a dictionary with 3 fields
+	"" - name:   name of the plugin
+	"" - status: 'installed', 'updated' or 'unchanged'
+	"" - force:  set on PlugInstall! or PlugUpdate!
+	"if a:info.status == 'installed' || a:info.force
+		"!./install --rust-completer
+	"endif
+"endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
+let g:plug_timeout=3600
 call plug#begin('~/.vim/plugged')
 
+"Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'preservim/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
-Plug 'arcticicestudio/nord-vim'
+"Plug 'arcticicestudio/nord-vim'
 Plug 'rust-lang/rust.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'habamax/vim-asciidoctor'
+
 
 call plug#end()
 
@@ -62,7 +77,7 @@ endif
 set number relativenumber
 
 " Load the colorscheme
-colorscheme nord
+"colorscheme nord
 
 filetype plugin indent on
 
@@ -144,9 +159,38 @@ set t_Co=256
 let g:airline_powerline_fonts = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set encoding=utf-8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Rust
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+filetype plugin indent on
 let g:rustfmt_autosave = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => asciidoctor
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" What to use for HTML, default `asciidoctor`.
+let g:asciidoctor_executable = 'asciidoctor'
+
+" Fold sections, default `0`.
+let g:asciidoctor_folding = 1
+
+" Fold options, default `0`.
+let g:asciidoctor_fold_options = 1
+
+" Call AsciidoctorMappings for all `*.adoc` and `*.asciidoc` files
+augroup asciidoctor
+    au!
+    au BufEnter *.adoc,*.asciidoc call AsciidoctorMappings()
+augroup END
+
+
+augroup ON_ASCIIDOCTOR_SAVE | au!
+    au BufWritePost *.adoc :Asciidoctor2HTML
+augroup end
 
 
